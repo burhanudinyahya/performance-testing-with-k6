@@ -19,10 +19,8 @@ export let options = {
   stages: [
     // Ramp-up from 1 to 5 VUs in 10s
     { duration: "15s", target: 50 },
-
     // Stay at rest on 5 VUs for 5s
     { duration: "30s", target: 50 },
-
     // Ramp-down from 5 to 0 VUs for 5s
     { duration: "15s", target: 0 }
   ],
@@ -32,8 +30,8 @@ export let options = {
 };
 
 export default function() {
-  const status = Math.random() < 0.9 ? "200" : "500";
-  let res = http.get(`http://httpbin.org/status/${status}`);
+  const statusCode = Math.random() < 0.9 ? "200" : "500";
+  let res = http.get(`https://httpbin.org/status/${statusCOde}`);
   let success = check(res, {
     "status is 200": r => r.status === 200
   });
@@ -43,6 +41,5 @@ export default function() {
   } else {
     ErrorRate.add(false);
   }
-
   sleep(0.5);
 }
